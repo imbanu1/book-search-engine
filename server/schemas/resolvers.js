@@ -23,7 +23,7 @@ login: async (parent, { email, password }) => {
     if (!user) {
         throw new AuthenticationError("Invalid password");
     }
-    const  correctPw = await.isCorrectPassword(password);
+    const  correctPw = await user.isCorrectPassword(password);
     if (!correctPw) {
         throw new AuthenticationError("Invalid password");
     }
@@ -46,8 +46,20 @@ saveBook: async (parent, {bookInput }, context) => {
         );
         return book;
     }
+    throw new AuthenticationError("You must be logged in")
+},
+removeBook: async (parent, { bookId }, context) => {
+    if (context.user) {
+        const book = await User.findByIdAndUpdate(
+            {_id: context.user._id},
+            {$pull: { savedBooks: { bookId }}},
+            { new: true }
+        );
+        return book;
+    }
+    throw new AuthenticationError("You must be logged in");
+},
 }
+    };
 
-
-
-}
+    module.exports = resolvers;
