@@ -31,5 +31,23 @@ login: async (parent, { email, password }) => {
     return {token, user};
 },
 
+addUser: async (parent, { usetname, email, password }) => {
+    const user = await User.create({ username, email, password});
+    const token = signToken(user);
+    return { token, user };
+},
+
+saveBook: async (parent, {bookInput }, context) => {
+    if (context.user) {
+        const book = await User.findByIdAndUpdate(
+            {_id: context.user._id},
+            {$push: { savedBooks: bookInput}},
+            {new: true}
+        );
+        return book;
+    }
+}
+
+
 
 }
