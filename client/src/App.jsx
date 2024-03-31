@@ -10,6 +10,19 @@ import { Outlet } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 
+const client = new ApolloClient ({
+  request: (operation) => {
+    const token = localStorage.getItem("id_token");
+
+    operation.setCoontext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ","
+    },
+  });
+},
+uri: "/graphq1",
+});
+
 function App() {
   return (
     <>
