@@ -25,10 +25,18 @@ uri: "/graphq1",
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
+    <ApolloProvider client = {client}>
+      <Router>
+        <>
+        <Navbar/>
+        <Switch>
+          <Route path="/" element={<SearchBooks />} />
+          <Route path="/saved" element={<savedBooks />} />
+          <Route path="*" element={<h1 className="display-2">Wrong Page!</h1>} />
+        </Switch>
+        </>
+      </Router>
+    </ApolloProvider>
   );
 }
 
