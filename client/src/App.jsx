@@ -31,7 +31,7 @@ function App() {
         <Navbar/>
         <Switch>
           <Route path="/" element={<SearchBooks />} />
-          <Route path="/saved" element={<savedBooks />} />
+          <Route path="/saved" element={<SavedBooks />} />
           <Route path="*" element={<h1 className="display-2">Wrong Page!</h1>} />
         </Switch>
         </>
