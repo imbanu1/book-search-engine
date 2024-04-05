@@ -1,9 +1,9 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const { typeDefs, resolvers } = require('./server/schemas');
-const { authMiddleware } = require('./server/utils/auth');
-const db = require('./server/config/connection');
+const { typeDefs, resolvers } = require('./schemas');
+const { authMiddleware } = require('./utils/auth');
+const db = require('./config/connection');
 
 
 const app = express();
@@ -37,3 +37,4 @@ db.once('open', () => {
   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqPath} `)
 });
 }
+startApolloServer()
