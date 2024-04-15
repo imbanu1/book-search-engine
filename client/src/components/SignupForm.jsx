@@ -30,11 +30,11 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { username, email, password } = userFormData;
-
+    console.log( username, email, password );
       try { 
-
+        console.log("inside try");
       await addUser({
-        variables: { username, email, password },
+        variables: { username:username, email:email, password:password },
       });
       console.log(data);
       Auth.login(data.addUser.token);
